@@ -1,0 +1,50 @@
+/* Core layout */
+.cpress{font-family:inherit;line-height:1.65}
+.cpress-section{margin-top:1rem;margin-bottom:.35rem;font-weight:700;letter-spacing:.2px}
+.cpress-line{white-space:pre-wrap;margin:.1rem 0}
+
+/* Inline chord chips */
+.cpress-chord{
+  background:#fff3b0;
+  border-radius:6px;
+  padding:0 .35rem;
+  font-weight:700;
+  border-bottom:none;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
+  display:inline-block
+}
+
+/* Song meta injected above content on single-song */
+.song-meta{margin:.5rem 0 1.25rem;color:#6b7280}
+
+/* Hide theme's default author/category line on Song CPT */
+body.single-song .wp-block-post-author-name,
+body.single-song .wp-block-post-terms{display:none !important}
+
+/* Toolbar (smaller font) */
+.cpress-toolbar{
+  position:sticky;top:0;z-index:10;
+  display:flex;justify-content:space-between;gap:.6rem;align-items:center;
+  margin:.6rem 0;padding:.45rem .65rem;
+  border:1px solid #e2e8f0;border-radius:.6rem;background:#f8fafc;flex-wrap:wrap;
+  font-size:.95em;
+}
+.cpress-toolbar .left,.cpress-toolbar .right{display:flex;gap:.45rem;align-items:center;flex-wrap:wrap}
+.cpress-toolbar select,.cpress-toolbar button,.cpress-toolbar label,.cpress-toolbar input{font:inherit}
+
+/* Key dropdown */
+.cpress-toolbar .cpress-key-select{min-width:7.5rem}
+.cpress-toolbar .muted{opacity:.7;font-size:.9em}
+
+/* Diagrams */
+.cpress-diagrams{display:flex;flex-wrap:wrap;gap:.35rem;margin:.25rem 0 .75rem}
+.cpress-diagram{width:88px;height:auto}
+@media (max-width:600px){ .cpress-diagram{width:72px} }
+
+/* Print */
+@media print{
+  .cpress-toolbar{display:none !important}
+  .cpress{line-height:1.5}
+  .cpress-diagram{width:72px}
+  body{color:#000}
+}

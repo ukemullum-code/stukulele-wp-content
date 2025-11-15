@@ -1,0 +1,77 @@
+<!--
+  Template: Archive (Song)
+  Uses standard header/footer and shows a small thumbnail (or fallback icon) before each title.
+-->
+
+<!-- wp:template-part {"slug":"header"} /-->
+
+<!-- wp:group {"layout":{"type":"constrained"}} -->
+<div class="wp-block-group">
+
+  <!-- wp:heading {"level":1} -->
+  <h1>Songs</h1>
+  <!-- /wp:heading -->
+
+  <!-- wp:query {"query":{"perPage":30,"postType":"song","order":"ASC","orderBy":"title"},"displayLayout":{"type":"list"}} -->
+  <div class="wp-block-query">
+
+    <!-- wp:post-template -->
+      <!-- Row wrapper -->
+      <!-- wp:group {"className":"song-row","style":{"spacing":{"margin":{"bottom":"16px"},"padding":{"bottom":"16px"},"blockGap":"6px"},"border":{"bottom":{"color":"#e5e7eb","width":"1px"}}}} -->
+      <div class="wp-block-group song-row" style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #e5e7eb">
+
+        <!-- Row line: thumbnail + text -->
+        <!-- wp:group {"className":"song-row-line","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
+        <div class="wp-block-group song-row-line">
+
+          <!-- Thumbnail (featured image) with fallback icon layered behind -->
+          <!-- wp:group {"className":"song-thumb"} -->
+          <div class="wp-block-group song-thumb">
+            <!-- wp:post-featured-image {"isLink":true} /-->
+            <!-- wp:html -->
+            <span class="thumb-fallback" aria-hidden="true"></span>
+            <!-- /wp:html -->
+          </div>
+          <!-- /wp:group -->
+
+          <!-- Text column -->
+          <!-- wp:group {"className":"song-text","layout":{"type":"constrained"}} -->
+          <div class="wp-block-group song-text">
+
+            <!-- Title -->
+            <!-- wp:post-title {"isLink":true} /-->
+
+            <!-- Meta: By {Artist} • {decade} -->
+            <!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap"},"style":{"typography":{"fontSize":"0.95rem"},"color":{"text":"#6b7280"}}} -->
+            <div class="wp-block-group" style="font-size:0.95rem;color:#6b7280">
+              <!-- wp:paragraph --><p>By&nbsp;</p><!-- /wp:paragraph -->
+              <!-- wp:post-terms {"term":"artist"} /-->
+              <!-- wp:paragraph --><p>&nbsp;•&nbsp;</p><!-- /wp:paragraph -->
+              <!-- wp:post-terms {"term":"decade"} /-->
+            </div>
+            <!-- /wp:group -->
+
+          </div>
+          <!-- /wp:group -->
+
+        </div>
+        <!-- /wp:group -->
+
+      </div>
+      <!-- /wp:group -->
+    <!-- /wp:post-template -->
+
+    <!-- Pagination -->
+    <!-- wp:query-pagination {"layout":{"type":"flex","justifyContent":"space-between"}} -->
+      <!-- wp:query-pagination-previous /-->
+      <!-- wp:query-pagination-numbers /-->
+      <!-- wp:query-pagination-next /-->
+    <!-- /wp:query-pagination -->
+
+  </div>
+  <!-- /wp:query -->
+
+</div>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer"} /-->

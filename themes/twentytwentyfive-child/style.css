@@ -1,0 +1,263 @@
+/*
+Theme Name: Twenty Twenty-Five Child
+Template: twentytwentyfive
+Version: 1.0.1
+*/
+
+/* ================================
+   GLOBAL TWEAKS
+=================================== */
+:root{
+  --cpress-diagram: 88px;
+  --cpress-gap: .35rem;
+}
+
+/* ================================
+   /chords/ (Song archive) – large thumb + tight meta
+=================================== */
+
+/* Row layout */
+.wp-block-query .song-row .song-row-line{
+  display:flex;
+  align-items:center;
+  gap:16px; /* space between thumb and text */
+}
+
+/* Thumbnail box = 150px square (default) */
+.wp-block-query .song-row .song-thumb{
+  position:relative;
+  width:150px;
+  height:150px;
+  flex:0 0 150px;
+  border-radius:10px;
+  overflow:hidden;
+  background:#f3f4f6;
+}
+.wp-block-query .song-row .song-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  position:relative;
+  z-index:1; /* sits above fallback */
+}
+
+/* Fallback icon (shows when no featured image is present) */
+.wp-block-query .song-row .song-thumb .thumb-fallback{
+  position:absolute;
+  inset:0;
+  opacity:.9;
+  background:center / contain no-repeat url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect x='3' y='3' width='18' height='18' rx='3' fill='%23e5e7eb'/><circle cx='12' cy='12' r='6' fill='%239ca3af'/><circle cx='12' cy='12' r='1.8' fill='%23ffffff'/></svg>");
+}
+
+/* Tighten meta line: “By {Artist} • {decade}” */
+.wp-block-query .song-row .song-text p{
+  display:inline;   /* kill block spacing */
+  margin:0;         /* remove default paragraph margins */
+}
+.wp-block-query .song-row .song-text .wp-block-group{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:4px;          /* small, even spacing between parts */
+}
+.wp-block-query .song-row .song-text .wp-block-post-terms{
+  display:inline;
+  margin:0;
+  padding:0;
+}
+.wp-block-query .song-row .song-text .wp-block-post-terms__separator{
+  margin:0;         /* no extra gap around separators */
+}
+
+/* Mid breakpoint: tablet-ish — 130px thumb */
+@media (max-width: 900px){
+  .wp-block-query .song-row .song-thumb{
+    width:130px; height:130px; flex-basis:130px;
+  }
+  .wp-block-query .song-row .song-row-line{ gap:14px; }
+}
+
+/* Small screens: phone — 110px thumb */
+@media (max-width:640px){
+  .wp-block-query .song-row .song-thumb{
+    width:110px; height:110px; flex-basis:110px;
+  }
+  .wp-block-query .song-row .song-row-line{ gap:12px; }
+}
+
+/* Search form light polish */
+.song-archive-search input[type="search"]{
+  border:1px solid #d1d5db; border-radius:8px; padding:.5rem .65rem; outline:none;
+}
+.song-archive-search button{
+  border:1px solid #d1d5db; border-radius:8px; padding:.5rem .75rem; background:#f3f4f6; cursor:pointer;
+}
+.song-archive-search button:hover{ background:#e5e7eb; }
+
+/* ================================
+   Single Song page – artist/decade inline & aligned
+=================================== */
+body.single-song .taxonomy-artist.wp-block-post-terms,
+body.single-song .taxonomy-decade.wp-block-post-terms{
+  display:inline-block;
+  vertical-align:baseline;
+  margin:0 !important;
+  padding:0;
+  font-size:0.9rem;
+  color:#6b7280;
+  line-height:1.3;
+}
+body.single-song .wp-block-group:has(> .taxonomy-artist.wp-block-post-terms),
+body.single-song .wp-block-group:has(> .taxonomy-decade.wp-block-post-terms){
+  max-width: var(--wp--style--global--content-size);
+  margin-left:auto !important;
+  margin-right:auto !important;
+  padding-left:0;
+  padding-right:0;
+}
+body.single-song .wp-block-post-terms{ margin-left:0 !important; }
+
+/* Hide default author/date on Song CPT (leave terms visible) */
+body.single-song .wp-block-post-author,
+body.single-song .wp-block-post-author-name,
+body.single-song .wp-block-post-date{ display:none !important; }
+
+/* ================================
+   ChordPress (inline chords + diagrams + toolbar)
+=================================== */
+
+/* Container + lines */
+.cpress{ line-height:1.65; }
+.cpress-section{ margin:.9rem 0 .4rem; font-weight:700; letter-spacing:.2px; }
+.cpress-line{ white-space:pre-wrap; margin:.1rem 0; }
+
+/* Inline chord chips (Stu’s formatting) */
+.cpress-chord{
+  background:#fff3b0;
+  border-radius:6px;
+  padding:0 .35rem;
+  font-weight:700;
+  border-bottom:none;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
+  display:inline-block;
+}
+
+/* Diagrams: max 6 per row */
+.cpress-diagrams{
+  display:flex; flex-wrap:wrap; gap:var(--cpress-gap);
+  max-width: calc(6 * var(--cpress-diagram) + 5 * var(--cpress-gap));
+  margin-bottom:.5rem;
+}
+.cpress-diagram{ width:var(--cpress-diagram); height:auto; }
+@media (max-width:600px){ .cpress{ --cpress-diagram:72px; } }
+
+/* Toolbar: clean + compact */
+.cpress-toolbar{
+  position:static;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+  display:flex; flex-wrap:wrap; align-items:center; gap:.6rem .8rem;
+  margin:.25rem 0 1rem;
+  padding:0;
+  font-size:.9rem;
+  line-height:1.2;
+}
+.cpress-toolbar select,
+.cpress-toolbar button,
+.cpress-toolbar label,
+.cpress-toolbar input{ font:inherit; }
+
+/* Key dropdown */
+.cpress-toolbar .cpress-key-select{
+  -webkit-appearance:none; appearance:none;
+  background:#f3f4f6;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  padding:.45rem .65rem;
+  line-height:1.2;
+  outline:none;
+}
+.cpress-toolbar .cpress-key-select:hover{ background:#eceff3; }
+.cpress-toolbar .cpress-key-select:focus{ box-shadow:0 0 0 2px rgba(59,130,246,.25); }
+
+/* Spelling toggle (♭ / #) */
+.cpress-toolbar .cpress-spell{ display:inline-flex; align-items:center; gap:.35rem; }
+.cpress-toolbar .cpress-spell button{
+  background:#f3f4f6; border:1px solid #d1d5db; margin:0;
+  padding:.35rem .55rem; line-height:1; cursor:pointer;
+}
+.cpress-toolbar .cpress-spell .cpress-spell-flat{ border-radius:8px 0 0 8px; border-right:none; }
+.cpress-toolbar .cpress-spell .cpress-spell-sharp{ border-radius:0 8px 8px 0; }
+.cpress-toolbar .cpress-spell button:hover{ background:#e5e7eb; }
+.cpress-toolbar .cpress-spell button.active{ background:#e5e7eb; }
+
+/* Diagrams / Nashville toggles simple */
+.cpress-toolbar .cpress-diag,
+.cpress-toolbar .cpress-nash{
+  display:inline-flex; align-items:center; gap:.35rem; color:#111827;
+}
+
+/* Transpose buttons — grey segmented control */
+.cpress-toolbar .cpress-btnrow{
+  display:inline-flex; overflow:hidden;
+  background:#f3f4f6;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+}
+.cpress-toolbar .cpress-btnrow button{
+  background:transparent; border:0; margin:0;
+  padding:.45rem .65rem; line-height:1.1; cursor:pointer;
+}
+.cpress-toolbar .cpress-btnrow button + button{ border-left:1px solid #d1d5db; }
+.cpress-toolbar .cpress-btnrow button:hover{ background:#e5e7eb; }
+.cpress-toolbar .cpress-btnrow button:active{ background:#dfe3e8; }
+.cpress-toolbar .cpress-btnrow button:focus{ outline:none; box-shadow:inset 0 0 0 2px rgba(59,130,246,.25); }
+
+/* Print tweaks */
+@media print{
+  .cpress-toolbar{ display:none !important; }
+  .cpress-diagram{ width:72px; }
+  body{ color:#000; }
+}
+/* --- Match single-song meta style on archive list --- */
+.wp-block-query .song-row .song-text > .wp-block-group{
+  font-size:.9rem !important;     /* like single */
+  color:#6b7280 !important;       /* like single */
+  line-height:1.3 !important;
+  font-weight: 600 !important;
+}
+
+/* tighter spacing around “By {artist} • {decade}” */
+.wp-block-query .song-row .song-text p{
+  display:inline;
+  margin:0;
+}
+.wp-block-query .song-row .song-text .wp-block-group{
+  display:inline-flex;
+  flex-wrap:wrap;
+  gap:2px;                        /* was 4px */
+}
+.wp-block-query .song-row .taxonomy-artist,
+.wp-block-query .song-row .taxonomy-decade{
+  display:inline-block;
+  margin:0;
+  padding:0;
+  font:inherit;
+  color:inherit;
+  line-height:inherit;
+}
+.wp-block-query .song-row .wp-block-post-terms__separator{
+  margin:0;
+}
+
+/* keep term links subtle like single */
+.wp-block-query .song-row .taxonomy-artist a,
+.wp-block-query .song-row .taxonomy-decade a{
+  color:inherit;
+  text-decoration:none;
+}
+.wp-block-query .song-row .taxonomy-artist a:hover,
+.wp-block-query .song-row .taxonomy-decade a:hover{
+  text-decoration:underline;
+}
