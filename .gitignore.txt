@@ -1,0 +1,9 @@
+# Don’t version huge / generated stuff
+uploads/
+cache/
+upgrade/
+ai1wm-backups/
+backups/
+wflogs/
+*.log
+*.sql
